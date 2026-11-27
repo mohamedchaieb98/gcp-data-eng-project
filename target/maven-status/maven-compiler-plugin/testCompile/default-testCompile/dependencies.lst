@@ -1,0 +1,12 @@
+classpath:C:\Users\mchaieb\Desktop\sephora-data-platform\target\classes	1:2ec28989419558a98ab2bbf4d5583388ec516161bcf62d2883ad081e896268e0
+classpath:C:\Users\mchaieb\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.3\jackson-databind-2.15.3.jar	1620120:1795713227838
+classpath:C:\Users\mchaieb\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.3\jackson-annotations-2.15.3.jar	75565:1795713227926
+classpath:C:\Users\mchaieb\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.3\jackson-core-2.15.3.jar	549233:1795713227997
+classpath:C:\Users\mchaieb\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.1\junit-jupiter-5.10.1.jar	6361:1795713227938
+classpath:C:\Users\mchaieb\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.1\junit-jupiter-api-5.10.1.jar	210958:1795713227967
+classpath:C:\Users\mchaieb\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar	14304:1795713227908
+classpath:C:\Users\mchaieb\.m2\repository\org\junit\platform\junit-platform-commons\1.10.1\junit-platform-commons-1.10.1.jar	106265:1795713227994
+classpath:C:\Users\mchaieb\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar	6806:1795713227994
+classpath:C:\Users\mchaieb\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.1\junit-jupiter-params-5.10.1.jar	586029:1795713228092
+classpath:C:\Users\mchaieb\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.1\junit-jupiter-engine-5.10.1.jar	244694:1795713228054
+classpath:C:\Users\mchaieb\.m2\repository\org\junit\platform\junit-platform-engine\1.10.1\junit-platform-engine-1.10.1.jar	204822:1795713228068
