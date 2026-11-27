@@ -1,67 +1,41 @@
-brand_name,founded_year,founder,country,company_age,age_group
-Amazon,1994,Jeff Bezos,Usa,32,21-50
-Alibaba,1999,Jack Ma,China,27,21-50
-Shopify,2006,Tobias Lütke,Canada,20,11-20
-PDD Holdings,2015,Colin Huang,China,11,11-20
-MercadoLibre,1999,Marcos Galperin,Argentina,27,21-50
-Carvana,2012,Ernie Garcia,Usa,14,11-20
-Meituan,2010,Wang Xing,China,16,11-20
-Sea Limited,2009,Forrest Li,Singapore,17,11-20
-JD.com,1998,Richard Liu,China,28,21-50
-eBay,1995,Pierre Omidyar,Usa,31,21-50
-Copart,1982,Willis Johnson,Usa,44,21-50
-Coupang,2010,Bom Kim,Usa,16,11-20
-JD Health,2013,Richard Liu (via JD.com),China,13,11-20
-Wayfair,2002,Niraj Shah and Steve Conine,Usa,24,21-50
-Alibaba Health Information Technology,1999,Jack Ma (via Alibaba),Hong Kong,27,21-50
-Chewy,2011,Ryan Cohen,Usa,15,11-20
-Rakuten,1997,Hiroshi Mikitani,Japan,29,21-50
-Ozon,1998,Alexander Egorov,Usa,28,21-50
-Instacart,2012,Apoorva Mehta,Usa,14,11-20
-Allegro.eu,1999,Arjan Bakker,Poland,27,21-50
-Vipshop,2008,Eric Shen and Hong Xiaobo,China,18,11-20
-Zalando,2008,Robert Gentz and David Schneider,Germany,18,11-20
-Nykaa,2012,Falguni Nayar,India,14,11-20
-Monotaro,2000,Kinya Seto,Japan,26,21-50
-ZOZO,1998,Yusaku Maezawa,Japan,28,21-50
-Global-e,2013,"Amir Schlachet, Shahar Tamari, Nir Debbi",Israel,13,11-20
-Etsy,2005,Rob Kalin,Usa,21,21-50
-GoTo,2015,Nadiem Makarim,Indonesia,11,11-20
-Mercari,2013,Shintaro Yamada,Japan,13,11-20
-Ocado,2000,"Jonathan Faiman, Jason Gissing, Tim Steiner",Uk,26,21-50
-Revolve,2003,Michael Mente and Mike Karanikolas,Usa,23,21-50
-Cimpress,1995,Robert Keane,Ireland,31,21-50
-The RealReal,2011,Julie Wainwright,Usa,15,11-20
-momo.com Inc.,2004,Chun-Tang Ho,Taiwan,22,21-50
-Jumia,2012,Jeremy Hodara and Sacha Poignonnec,Germany,14,11-20
-Lightspeed POS,2005,Dax DaSilva,Canada,21,21-50
-IndiaMART,1999,Dinesh Agarwal,India,27,21-50
-Redcare Pharmacy,2001,Marc van Gelder,Netherlands,25,21-50
-About You,2014,"Tarek Müller, Benjamin Shure, Hannes Wiese",Germany,12,11-20
-Liquidity Services,1999,William P. Angrick III,Usa,27,21-50
-Bukalapak.com,2010,Achmad Zaky,Indonesia,16,11-20
-Newegg,2001,Fred Chang,Usa,25,21-50
-THG (The Hut Group),2004,Matthew Moulding,Uk,22,21-50
-CEWE,1961,Hubertus Binder,Germany,65,50+
-Uxin Limited,2011,Dai Kun,China,15,11-20
-ThredUp,2009,James Reinhart,Usa,17,11-20
-Groupon,2008,Andrew Mason,Usa,18,11-20
-BHG Group AB,2006,Adam Schatz,Sweden,20,11-20
-Dingdong Maicai,2017,Liang Changlin,China,9,6-10
-VTEX,1999,Geraldo Thomaz Jr. and Mariano Gomide de Faria,Uk,27,21-50
-Infibeam Avenues,2007,Vishal Mehta,India,19,11-20
-Auction Technology Group,2014,John-Paul Savant,Uk,12,11-20
-Wirtualna Polska (WP Holding),1995,"Jacek Świderski, Maciej Kossowski, Michał Brański",Poland,31,21-50
-ASOS,2000,Nick Robertson and Quentin Griffiths,Uk,26,21-50
-Boohoo Group,2006,Mahmud Kamani and Carol Kane,Uk,20,11-20
-BigCommerce,2009,Eddie Machaalani and Mitchell Harper,Usa,17,11-20
-Westwing Group,2011,Delia Lachance and Stefan Smalla,Germany,15,11-20
-Rent the Runway,2009,Jennifer Hyman and Jennifer Fleiss,Usa,17,11-20
-1stdibs.com,2001,Michael Bruno,Usa,25,21-50
-Verkkokauppa.com,1992,Samuli Seppälä,Finland,34,21-50
-Vente-Unique.com,2006,Sacha Vigna,France,20,11-20
-Americanas,1929,Max Landesmann,Brazil,97,50+
-Baozun,2007,Vincent Wenbin Qiu,China,19,11-20
-The Original BARK Company,2011,"Matt Meeker, Henrik Werdelin, Carly Strife",Usa,15,11-20
-Webuy Global,2018,"Bin Xue, Gin Loo, Ilay Yulish",Singapore,8,6-10
-Jeffs' Brands,2021,Viki Hakmon,Israel,5,0-5
+id,nom,groupe,categorie,date_partenariat,pays_origine
+1,"Dior","LVMH",luxe,2008-07-22,FR
+2,"Chanel","Chanel",luxe,2003-04-12,FR
+3,"Givenchy","LVMH",luxe,2011-02-16,FR
+4,"Yves Saint Laurent","L'Oreal",luxe,2013-07-12,FR
+5,"Lancome","L'Oreal",luxe,2009-04-22,FR
+6,"Guerlain","LVMH",luxe,2014-07-06,FR
+7,"Hermes Beaute","Hermes",luxe,2004-02-09,FR
+8,"Armani Beauty","L'Oreal",luxe,2020-01-26,IT
+9,"Tom Ford Beauty","Estee Lauder",luxe,2007-12-27,US
+10,"La Mer","Estee Lauder",luxe,2008-04-04,US
+11,"Estee Lauder","Estee Lauder",luxe,2017-05-11,US
+12,"Clinique","Estee Lauder",mass-premium,2016-11-06,US
+13,"MAC Cosmetics","Estee Lauder",mass-premium,2003-12-01,CA
+14,"NARS","Shiseido",mass-premium,2021-06-27,US
+15,"Benefit Cosmetics","LVMH",mass-premium,2016-05-12,US
+16,"Urban Decay","L'Oreal",mass-premium,2012-12-11,US
+17,"Too Faced","Estee Lauder",mass-premium,2018-09-13,US
+18,"Fenty Beauty","LVMH",mass-premium,2016-09-21,US
+19,"Rare Beauty","Independant",indie,2015-12-22,US
+20,"Charlotte Tilbury","Puig",luxe,2013-06-27,UK
+21,"Sephora Collection","LVMH",mass,2022-07-04,FR
+22,"The Ordinary","Estee Lauder",mass,2003-07-24,CA
+23,"CeraVe","L'Oreal",mass,2021-08-21,US
+24,"La Roche-Posay","L'Oreal",mass-premium,2004-08-20,FR
+25,"Drunk Elephant","Shiseido",indie,2018-03-09,US
+26,"Tatcha","Unilever",indie,2022-04-15,US
+27,"Sol de Janeiro","L'Occitane",indie,2006-02-09,BR
+28,"Olaplex","Independant",indie,2007-12-05,US
+29,"K18","Independant",indie,2008-05-11,US
+30,"Augustinus Bader","Independant",luxe,2007-08-19,DE
+31,"Shiseido","Shiseido",luxe,2017-04-23,JP
+32,"SK-II","P&G",luxe,2016-03-24,JP
+33,"Sulwhasoo","Amorepacific",luxe,2024-04-24,KR
+34,"Laneige","Amorepacific",mass-premium,2010-05-15,KR
+35,"Kiehl's","L'Oreal",mass-premium,2016-08-25,US
+36,"Fresh","LVMH",mass-premium,2016-11-15,US
+37,"Bumble and bumble","Estee Lauder",mass-premium,2008-07-26,US
+38,"Moroccanoil","Independant",mass-premium,2018-02-26,IL
+39,"Dyson","Dyson",luxe,2003-08-09,UK
+40,"ghd","Coty",mass-premium,2016-10-20,UK

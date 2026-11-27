@@ -1,6 +1,6 @@
 # Sephora Data Platform
 
-Data modeling project for Sephora, covering the conceptual model, the three-layer architecture (Raw, DWH, DM) and the loading strategies.
+Data modeling project for Sephora: conceptual model, three-layer architecture (Raw, DWH, DM), and loading strategies.
 
 ## Project setup
 
@@ -16,79 +16,123 @@ Dependencies: Jackson Databind 2.15.3, JUnit Jupiter 5.10.1 (test scope).
 
 ```mermaid
 erDiagram
+  BRANDS ||--o{ PRODUCTS : "owns"
+  PRODUCTS ||--o{ SALES : "is sold in"
   STORES ||--o{ SALES : "records"
-  BRANDS ||--o{ SALES : "is sold in"
+  PRODUCTS ||--o{ MATERIALS : "is made of"
+  STORES ||--o{ EMPLOYEES : "employs"
 
-  STORES {
-    string StoreCode PK
-    string StoreName
-    string StoreType
-    string Location
-    int OperatingCost
-    int Staff_Cnt
-    int TotalSales
-    int Total_Customers
-    float AcqCostPercust
-    float BasketSize
-    float ProfitPercust
-    int OwnStore
-    int OnlinePresence
-    int Tenure
-    int StoreSegment
-  }
   BRANDS {
-    string brand_name PK
-    int founded_year
-    string founder
-    string country
-    int company_age
-    string age_group
+    int id PK
+    string nom
+    string groupe
+    string categorie
+    date date_partenariat
+    string pays_origine
+  }
+  STORES {
+    int id PK
+    string nom
+    string adresse
+    string pays
+    string region
+    int surface
+    date date_ouverture
+    string statut
+    int nb_employes
+  }
+  PRODUCTS {
+    int id PK
+    int brand_id FK
+    string nom
+    string categorie
+    float prix
+    boolean is_bio
+    boolean is_vegan
   }
   SALES {
-    string StoreCode FK
-    string brand_name FK
-    date sale_date
-    decimal amount
+    int id PK
+    int store_id FK
+    int product_id FK
+    date date
+    float CA_TTC
+    float CA_HT
+    int quantite
+  }
+  MATERIALS {
+    int id PK
+    int product_id FK
+    string matiere
+    string certification
+  }
+  EMPLOYEES {
+    int id PK
+    int store_id FK
   }
 ```
 
-**Keys**
-- `STORES.StoreCode` is the primary key. Check for duplicates.
-- `BRANDS.brand_name` is the natural key. Check for duplicates and spelling variants.
-- `SALES` is a placeholder linking stores and brands. It is not in the source files and must be confirmed.
+**Keys and cardinalities**
 
-**Cardinalities**
-- Stores to Sales: 1:N
-- Brands to Sales: 1:N
+| Relation | Cardinality | Meaning |
+|---|---|---|
+| Brands to Products | 1:N | One brand owns many products. Each product has one brand (`PRODUCTS.brand_id`). |
+| Products to Sales | 1:N | One product appears in many sales lines. Each sale is for one product. |
+| Stores to Sales | 1:N | One store records many sales. Each sale happens in one store. |
+| Products to Materials | 1:N | One product is made of several materials. Each material row points to one product. |
+| Stores to Employees | 1:N | One store employs many employees. Each employee works in one store. |
+
+Brands and stores are not linked directly. They connect through products and sales.
+
+**Status of the attributes**
+- `BRANDS` and `STORES` match `brands_full.csv` and `stores_full.csv` exactly.
+- `PRODUCTS`, `SALES`, `MATERIALS`, and `EMPLOYEES` follow the field names in the course material. Check them against the real files when they are available.
 
 ## 2. Three-layer architecture
 
-| Layer | Table | Content | Load strategy |
-|---|---|---|---|
-| Raw | `raw_stores` | Exact copy of `stores_full.csv`, all 15 columns | Full (TRUNCATE + INSERT) |
-| Raw | `raw_brands` | Exact copy of `brands_full.csv`, all 6 columns | Full |
-| DWH | `dwh_stores_enriched` | Cleaned stores, plus `ca_par_client` = TotalSales / Total_Customers | Full |
-| DWH | `dwh_brands_enriched` | Cleaned brands (country normalized to `USA`). Sales metrics pending the sales file | Full |
-| DM | `dm_stores_par_location` | Per Location: store count, average TotalSales, total customers | Full |
-| DM | `dm_brands_ranking` | Brands ranked by company_age and founded_year (temporary until sales data is available) | Full |
-| View | `v_stores_own` | Stores where `OwnStore = 1` | None |
+| Layer | Table | Content | Load strategy | Requires |
+|---|---|---|---|---|
+| Raw | `raw_stores` | Exact copy of `stores_full.csv`, all 9 columns | Full (TRUNCATE + INSERT) | None |
+| Raw | `raw_brands` | Exact copy of `brands_full.csv`, all 6 columns | Full | None |
+| DWH | `dwh_stores_enriched` | Store columns + `nb_produits_vendus`, `ca_total`, `derniere_vente` | Full | `sales_full.json` |
+| DWH | `dwh_brands_enriched` | Brand columns + `nb_produits`, `ca_total`, `categorie_dominante` | Full | `products_full.json`, `sales_full.json` |
+| DM | `dm_stores_par_region` | Per `region` and `pays`: store count, total surface, average revenue | Full | DWH stores |
+| DM | `dm_brands_ranking` | Brands ranked by revenue (`rang_ca`) and by product count (`rang_produits`) | Full | DWH brands |
+| View | `v_stores_actifs` | Stores where `statut = 'OUVERT'` | None (computed on query) | DWH stores |
+
+**Why full load everywhere:** the files are snapshots without a change flag, and the aggregates (ranking, dominant category, averages) depend on all rows. If the source files become incremental, switch the raw tables to delta (MERGE on `id`).
+
+**Naming conventions:** prefixes show the layer.
+
+| Prefix | Meaning | Example |
+|---|---|---|
+| `raw_` | Raw copy of the source, no transformation | `raw_stores` |
+| `dwh_` | Cleaned and enriched data (warehouse) | `dwh_stores_enriched` |
+| `dm_` | Data mart, aggregated for reporting | `dm_stores_par_region` |
+| `v_` | View, no physical storage | `v_stores_actifs` |
 
 ## 3. Data flow
 
 ```
-stores_full.csv ──► raw_stores ──► dwh_stores_enriched ──► dm_stores_par_location ──► v_stores_own
+stores_full.csv ──► raw_stores ──► dwh_stores_enriched ──► dm_stores_par_region
+                                          │
+                                          └──► v_stores_actifs
 
 brands_full.csv ──► raw_brands ──► dwh_brands_enriched ──► dm_brands_ranking
+                                          ▲
+                        products_full.json ─┴─ sales_full.json
 ```
 
-## 4. Data quality issues
+## 4. Data quality checks (DWH layer)
 
-- `StoreType` contains the typo `Electronincs`. Correct it in the DWH layer, not in raw.
-- `country` contains `Usa` in one row. Standardize to `USA`.
-- `age_group` values such as `21-50` can be converted to dates by Excel. Load as text.
-- Units of `TotalSales` and `OperatingCost` are not documented. Confirm with the exercise.
+- `statut`: confirm the full list of values. The course mentions `OUVERT` and `RENOVATION`.
+- `categorie` (brands): use only `luxe`, `masspremium`, `mass`, `indie`.
+- `groupe`: check for inconsistent spelling (`LVMH` vs `Lvmh`).
+- `nom` (brands): check for duplicates.
+- `pays` and `pays_origine`: use standard two-letter codes (`FR`, `US`, `ES`).
+- Dates (`date_partenariat`, `date_ouverture`): keep in `YYYY-MM-DD` format.
 
 ## 5. Open points
 
-- The sales file is missing. Without it, `nb_products`, `ca_total` and `categorie_dominante` cannot be computed.
-- Employees, Products, Materials and Regions are not present in the provided files.
+- `products_full.json` and `sales_full.json` are needed for the DWH metrics. Their structure must be confirmed.
+- `materials_full.xml` and `employees_full.csv` are needed for the Materials and Employees entities. The attributes shown are placeholders.
+- The `SALES` table assumes an `id` key. Confirm it in the sales file.
